@@ -3,7 +3,7 @@ import random
 import os
 from keep_alive import keep_alive 
 
-vivi = 0
+vivi = 1
 kugisaki  = discord.Client()
 
 
@@ -90,6 +90,13 @@ lol_reply = ['Jugemu-jugemu Gokōnosurikire Kaijarisuigyo-no Suigyōmatsu Unraim
 
 
 
+
+
+######################################################
+#########################################################3
+#3########################################################3
+
+
 @kugisaki.event
 async def on_ready():
   print('ONLIne as {0.user}'.format(kugisaki))
@@ -102,22 +109,25 @@ async def on_message(message):
 
   msg = message.content
   
-  if msg.startswith('$ACTIVATE VIVI'):
-    await message.channel.send('#--VIVI IS ONLINE--#')
-    
+  
 
 
   if msg.startswith('$DEACTIVATE VIVI'):
     await message.channel.send('#--VIVI IS OFFLINE--#')
     global vivi
+    vivi=0
+
+  if msg.startswith('$ACTIVATE VIVI'):
+    await message.channel.send('#--VIVI IS ONLINE--#')
+    
     vivi=1
+    
+    
 
-
-
-  if vivi==0:
+  if vivi==1:
     if msg.startswith('hi'):
       await message.channel.send('hey')
-
+    
     #################---1
     if any(word in msg for word in gali):
 
