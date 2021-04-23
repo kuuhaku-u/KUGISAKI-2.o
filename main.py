@@ -198,6 +198,46 @@ async def memee(ctx):
     await ctx.send(embed = em)
 
 
+@kugisaki.command(aliases=['nude'])
+async def henati(ctx):
+  async with ctx.typing():
+    subreddit = reddit.subreddit("Hentai")
+    all_subs = []
+    top = subreddit.top(limit = 500)
+
+    for submission in top:
+      all_subs.append(submission)
+      
+    random_sub = random.choice(all_subs)
+
+
+    url = random_sub.url
+
+    em = discord.Embed()
+    em.set_image(url = url )
+    await ctx.send(embed = em)
+
+
+@kugisaki.command(aliases=['nudes'])
+async def echi(ctx):
+  async with ctx.typing():
+    subreddit = reddit.subreddit("Ecchi")
+    all_subs = []
+    top = subreddit.top(limit = 500)
+
+    for submission in top:
+      all_subs.append(submission)
+      
+    random_sub = random.choice(all_subs)
+
+
+    url = random_sub.url
+
+    em = discord.Embed()
+    em.set_image(url = url )
+    await ctx.send(embed = em)
+
+
 
 @kugisaki.command()
 async def test(ctx):
