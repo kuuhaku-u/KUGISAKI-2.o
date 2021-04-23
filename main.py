@@ -1,14 +1,23 @@
 import discord
 import random
+import json
 import os
 from keep_alive import keep_alive
 import googletrans
 from discord.ext import commands
+import praw
 
 kugisaki = discord.Client()
 kugisaki = commands.Bot(command_prefix="#")
 
 
+
+
+reddit = praw.Reddit(client_id =os.getenv('id'),
+                     client_secret=os.getenv('keyy'),
+                     #u_name=os.getenv('namee'),
+                     #pswdd=os.getenv('psed'),
+                     user_agent="vivy" )
 vivi = 1
 
 @kugisaki.command()
@@ -127,11 +136,84 @@ async def LangList(ctx):
     """
   )
 
- 
+
+@kugisaki.command(aliases=['anime'])
+async def AnimeArt(ctx):
+  async with ctx.typing():
+    subreddit = reddit.subreddit("AnimeArt")
+    all_subs = []
+    top = subreddit.top(limit = 500)
+
+    for submission in top:
+      all_subs.append(submission)
+      
+    random_sub = random.choice(all_subs)
+
+
+    url = random_sub.url
+
+    em = discord.Embed()
+    em.set_image(url = url )
+    await ctx.send(embed = em)
+
+
+
+@kugisaki.command(aliases=['meme'])
+async def memes(ctx):
+  async with ctx.typing():
+    subreddit = reddit.subreddit("IndianDankMemes")
+    all_subs = []
+    top = subreddit.top(limit = 500)
+
+    for submission in top:
+      all_subs.append(submission)
+      
+    random_sub = random.choice(all_subs)
+
+
+    url = random_sub.url
+
+    em = discord.Embed()
+    em.set_image(url = url )
+    await ctx.send(embed = em)
+
+
+@kugisaki.command()
+async def memee(ctx):
+  async with ctx.typing():
+    subreddit = reddit.subreddit("Meme")
+    all_subs = []
+    top = subreddit.top(limit = 500)
+
+    for submission in top:
+      all_subs.append(submission)
+      
+    random_sub = random.choice(all_subs)
+
+
+    url = random_sub.url
+
+    em = discord.Embed()
+    em.set_image(url = url )
+    await ctx.send(embed = em)
+
+
 
 @kugisaki.command()
 async def test(ctx):
-  await ctx.send("Command executed")
+  async with ctx.channel.typing():
+    await ctx.send("Command executed")
+
+
+
+
+@kugisaki.command()
+async def roles(ctx):
+  await ctx.send("server roles-\n kamisama/神様/god-ANKIT\n Maō-sama/魔王様/demonLord-samudro and bhalu\n ningen/人間//human-EvryoneElse")
+
+@kugisaki.command()
+async def rules(ctx):
+  await ctx.send("#####---RULES---##### \n 1) Imp rule be ready for sexy time \n 2) Nobody talk about 2 girl 1 cup video \n 3) Don't judge people , this is judgement free area \n 4) Banch0 jisne kartik ko faltu bola usko perma BAN ")
 
 @kugisaki.command(aliases=['tr'])
 async def translate(ctx, lang_to, *args):
@@ -207,6 +289,9 @@ gali = [
     'GAND', "Gand"
 ]
 
+
+va=['vanshaj','vansh','Vanshaj','Vansh']
+va_reply=['Vanshika mausi bol usse']
 sa = ['Samudro', 'samudro']
 sa_reply = ['yaahooo onii-sama', 'yamete kudasai captain-sama']
 
@@ -219,6 +304,10 @@ bot_reply = [
     'yeasss', 'gand mara bokachoda',
     'i dont know wht u saying but i like sex ', 'i m watchinbg anal stuff DND'
 ]
+
+vivy=['vivy','Vivy','VIVY','vivY']
+vivy_reply=['YES! what can i do for you','did someone call me','wht u want asswipe','mera naam lene ki auakt h teri','bol be gandu','Tere gand ko hole smjhke maaru mai shot... Naam h mera vivy bot__bol ab kya chea']
+
 
 ri = ['riya', 'RIYA', 'Riya']
 
@@ -269,6 +358,10 @@ async def on_message(message):
 
     if msg.startswith('$DEACTIVATE VIVI'):
         await message.channel.send('#--VIVI IS OFFLINE--#')
+        await message.channel.send('#--password--#')
+        
+        
+        
         global vivi
         vivi = 0
 
@@ -277,7 +370,7 @@ async def on_message(message):
 
         vivi = 1
 
-    if vivi == 1:
+    if vivi == 1 :
         if msg.startswith('hi'):
             await message.channel.send('hey')
 
@@ -372,6 +465,13 @@ async def on_message(message):
         ########-15
         if any(word in msg for word in cc):
             await message.channel.send(random.choice(cc_reply))
+        
+        ########-16
+        if any(word in msg for word in vivy):
+            await message.channel.send(random.choice(vivy_reply))
+        ########-17
+        if any(word in msg for word in va):
+            await message.channel.send(random.choice(va_reply))
 
     else:
         return
