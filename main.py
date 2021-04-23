@@ -289,6 +289,7 @@ async def playy(ctx):
 
 
 
+
 @kugisaki.command()
 async def play(ctx, url : str):
     song_there = os.path.isfile("song.mp3")
