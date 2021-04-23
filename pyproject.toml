@@ -11,6 +11,9 @@ flask = "^1.1.2"
 googletranslate = "^2.1.2"
 googletrans = "^3.0.0"
 praw = "^7.2.0"
+ffmpeg = "^1.4"
+youtube-dl = "^2021.4.17"
+PyNaCl = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 

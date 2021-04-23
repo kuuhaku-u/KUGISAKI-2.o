@@ -6,6 +6,9 @@ from keep_alive import keep_alive
 import googletrans
 from discord.ext import commands
 import praw
+import ffmpeg
+import youtube_dl
+import nacl
 
 kugisaki = discord.Client()
 kugisaki = commands.Bot(command_prefix="#")
@@ -270,7 +273,92 @@ async def translate(ctx, lang_to, *args):
     translator = googletrans.Translator()
     text_translated = translator.translate(text, dest=lang_to).text
     await ctx.send(text_translated)
-   
+
+
+############################################################
+####################---AUDIO_FEAUTRE___#####################
+############################################################
+
+
+@kugisaki.command()
+async def playy(ctx):
+  voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='chillin')
+  voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+  await voiceChannel.connect()
+
+
+
+
+@kugisaki.command()
+async def play(ctx, url : str):
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            print("ok")
+    except PermissionError:
+        await ctx.send("Wait for the current playing music to end or use the 'stop' command")
+        return
+
+    voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='chillin')
+    await voiceChannel.connect()
+    voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            os.rename(file, "song.mp3")
+    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+
+
+@kugisaki.command()
+async def leave(ctx):
+    voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+    if voice.is_connected():
+        await voice.disconnect()
+    else:
+        await ctx.send("The bot is not connected to a voice channel.")
+
+
+@kugisaki.command()
+async def pause(ctx):
+    voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send("Currently no audio is playing.")
+
+
+@kugisaki.command()
+async def resume(ctx):
+    voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send("The audio is not paused.")
+
+
+@kugisaki.command()
+async def stop(ctx):
+    voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+    voice.stop()
+
+
+
+
+
+
+
+
+
 
 
 #######################################################################33
