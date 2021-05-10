@@ -205,44 +205,8 @@ async def memee(ctx):
     await ctx.send(embed = em)
 
 
-@kugisaki.command(aliases=['nude'])
-async def henati(ctx):
-  async with ctx.typing():
-    subreddit = reddit.subreddit("Hentai")
-    all_subs = []
-    top = subreddit.top(limit = 500)
-
-    for submission in top:
-      all_subs.append(submission)
-      
-    random_sub = random.choice(all_subs)
 
 
-    url = random_sub.url
-
-    em = discord.Embed()
-    em.set_image(url = url )
-    await ctx.send(embed = em)
-
-
-@kugisaki.command(aliases=['nudes'])
-async def echi(ctx):
-  async with ctx.typing():
-    subreddit = reddit.subreddit("Ecchi")
-    all_subs = []
-    top = subreddit.top(limit = 500)
-
-    for submission in top:
-      all_subs.append(submission)
-      
-    random_sub = random.choice(all_subs)
-
-
-    url = random_sub.url
-
-    em = discord.Embed()
-    em.set_image(url = url )
-    await ctx.send(embed = em)
 
 
 
@@ -260,7 +224,7 @@ async def roles(ctx):
 
 @kugisaki.command()
 async def rules(ctx):
-  await ctx.send("#####---RULES---##### \n 1) Imp rule be ready for sexy time \n 2) Nobody talk about 2 girl 1 cup video \n 3) Don't judge people , this is judgement free area \n 4) Banch0 jisne kartik ko faltu bola usko perma BAN ")
+  await ctx.send("#####---RULES---##### \n 1) Imp rule be ready for fun time \n 2) Nobody talk about agressively \n 3) Don't judge people , this is judgement free area \n  ")
 
 @kugisaki.command(aliases=['tr'])
 async def translate(ctx, lang_to, *args):
