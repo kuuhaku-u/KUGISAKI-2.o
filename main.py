@@ -9,6 +9,10 @@ import praw
 import ffmpeg
 import youtube_dl
 import nacl
+import pyttsx3
+import gtts  
+from playsound import playsound  
+
 
 kugisaki = discord.Client()
 kugisaki = commands.Bot(command_prefix="#")
@@ -356,107 +360,41 @@ async def stop(ctx):
 
 
 
+########################################################################3
+####################################################################3
+###################################################################3
 
 
 
+@kugisaki.command()
+async def join(ctx):
+  voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='sexy_time')
+  await voiceChannel.connect()
+  voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
 
 
+
+@kugisaki.command()
+async def spea(ctx):
+  await ctx.send("This is a tts message", tts=True)
+
+
+@kugisaki.command()
+async def speak(ctx):
+  voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='sexy_time')
+  await voiceChannel.connect()
+  voice = discord.utils.get(kugisaki.voice_clients, guild=ctx.guild)
+  voice.play(discord.FFmpegPCMAudio("hello.mp3"))
+ 
 
 #######################################################################33
 ###################---list-----######################################3
 ############################################################3
 
-name = [
-    'gupta',
-    'dog',
-    'Gupta',
-    'GUPTA',
-    'dOG',
-    'Dog',
-]
-
-cc = ['PARIVARIK', 'parivarik']
-cc_reply = ['ja na chuttad', 'toh ab kya itni si baat pe gand maarega bc']
-
-bh = ['bhalu', 'Bhalu', 'BHALU', 'Abhishek', 'ABHISHEK', 'abhishek']
-
-vr = ['vridhi', 'VRIDHI', 'Vridhi', 'vridi', 'VRIDI', 'Vridi']
-vr_reply = [
-    'banchod  fir bhul gae tum esko', 'arey bancho h kya ye abhi tk',
-    'he is busy snding insta reels'
-]
-
-name_reply = [
-    'uske muh me lauda h vo busy h..',
-    'he is busy sniffing his balls',
-    'gand ke nashe kr rha h abhi vo',
-    'bokachoda kha h',
-    'apne hi muut pee rha h vo',
-]
-bh_reply = [
-    'uske muh me lauda h vo busy h..', 'he is busy sniffing his balls',
-    'gand ke nashe kr rha h abhi vo', 'bokachoda kha h', 'He is stalking Riya'
-]
-
-an = ['ankit', 'Ankit', 'ANKIT']
-
-sas = [
-    'aega koi', 'Aega', 'AEGA', 'GAME', 'game', 'Game', 'lodu', 'LODU', 'Ludo',
-    'bakchodi', 'BAKCHODI', 'Bakchodi', 'bakchod', 'BAKCHOD', 'Bakchod'
-    'Koi aa nhi rha kya aaj?', 'KOI AA ', 'Koi aa'
-    'COME', 'Come', 'come', 'cum', 'Cum', 'CUM'
-]
-
-sas_reply = [
-    "soo ja na bsdk", "kaam dhanda ni h tum pe", "cuming",
-    'NOOOOOOOOOOOOOOOOOO', 'SEXXXX'
-]
-
-gali = [
-    'bc', 'BC', 'bancho', 'BANCHO', 'banchod', 'bancho', 'Banchod', 'BANCHOD',
-    'bokachoda', 'BOKACHODA', 'Bokachoda', 'lund', 'LUND', 'loda', 'Lund',
-    'GAND', "Gand"
-]
 
 
-va=['vanshaj','vansh','Vanshaj','Vansh']
-va_reply=['Vanshika mausi bol usse']
-sa = ['Samudro', 'samudro']
-sa_reply = ['yaahooo onii-sama', 'yamete kudasai captain-sama']
-
-bot = [
-    'bot', 'sexy_bot', 'Bot', 'SEXY', 'Bot', 'Sexy', 'BOT', 'sexy', '@sexy_bot'
-]
-
-bot_reply = [
-    'kya chea trko...', 'aati kya khandala chikne', 'kya chea bancho trko',
-    'yeasss', 'gand mara bokachoda',
-    'i dont know wht u saying but i like sex ', 'i m watchinbg anal stuff DND'
-]
-
-vivy=['vivy','Vivy','VIVY','vivY']
-vivy_reply=['YES! what can i do for you','did someone call me','wht u want asswipe','mera naam lene ki auakt h teri','bol be gandu','Tere gand ko hole smjhke maaru mai shot... Naam h mera vivy bot__bol ab kya chea']
 
 
-ri = ['riya', 'RIYA', 'Riya']
-
-ri_reply = [
-    'arey shanti chli jaegi eske ate he', 'arey bol oi', 'arey chotu ki maa',
-    'palnt animal ble h ye ', 'she in love with bhalu', 'bndRiya bol'
-]
-
-gm = ['pubg', 'Pubg', 'PUBG', 'ludo', 'Ludo']
-gm_reply = [
-    'pdh le bsdk', 'pehle sbka muh me leke naach ek baar',
-    'apna kaam kr na bhadwe'
-]
-
-bb = ['moan']
-bb_reply = ['vo muh me leta h uss time toh awaz nhi aata']
-
-lol = ['naam', 'name']
-lol_reply = [
-    'Jugemu-jugemu Gokōnosurikire Kaijarisuigyo-no Suigyōmatsu Unraimatsu Fūraimatsu Kūnerutokoroni-sumutokoro Yaburakōjino-burakōji Paipopaipo-paiponoshūringan Shūringanno-gūrindai Gūrindaino-ponpokopīno-ponpokonāno Chōkyūmeino-chōsuke'
 ]
 
 ########################################################3
@@ -507,7 +445,7 @@ async def on_message(message):
         if any(word in msg for word in gali):
 
             await message.channel.send(
-                "######---PARIVARIK GROUP H YE KIRPYA KRKE GAND MASTI NA KRE---#########"
+                "######---PARIVARIK GROUP H YE ---#########"
             )
 
         ##################---2
@@ -524,31 +462,11 @@ async def on_message(message):
 
         ###############---4
 
-        if msg.startswith('bakchodi'):
-            await message.channel.send('arey bokachoda')
+        
 
         ###############---5
 
-        if msg.startswith('69'):
-            await message.channel.send('shok badi cheez h')
-
-        if msg.startswith('saxx' or 'sex'):
-            await message.channel.send('ghante ke 100rs')
-
-        if msg.startswith('Bol' or 'bol'):
-            await message.channel.send(
-                'jisne mujhe bulaya uske alawa sb bhosdiwale')
-
-        if msg.startswith('shubham'):
-            await message.channel.send('mutthal h saala')
-
-        ###############---6
-        if msg.startswith('Teri gaand' or 'tera gand'):
-            await message.channel.send('muh me lega')
-
-        if any(word in msg for word in an):
-            await message.channel.send('he is watching hentai/sex stuff')
-
+      
         #############-7
 
         #############--8
@@ -601,6 +519,10 @@ async def on_message(message):
         ########-17
         if any(word in msg for word in va):
             await message.channel.send(random.choice(va_reply))
+
+
+        
+
 
     else:
         return
